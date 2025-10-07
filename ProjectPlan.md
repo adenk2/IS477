@@ -7,6 +7,7 @@ Team: Clearly define team member roles and responsibilities
 Datasets: Identify and describe the datasets that you will use. You need to use at least two different datasets that need to be integrated.
 
 Timeline: Document the plan and timeline for implementing your project including who will complete each task.
+
 Data lifecycle (cf. Module 1): Relate your project to one or more of the lifecycle models discussed in class.
 
 Ethical data handling (cf. Module 2): Identification of all ethical, legal, or policy constraints and how they were addressed. This includes issues related to consent, privacy/confidentiality, copyright, licenses and terms of use.
