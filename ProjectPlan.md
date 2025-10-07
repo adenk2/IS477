@@ -6,9 +6,9 @@ Team: Clearly define team member roles and responsibilities
 
 Datasets: Identify and describe the datasets that you will use. You need to use at least two different datasets that need to be integrated. 
 
-1) https://www.ncei.noaa.gov/access/search/data-search/global-summary-of-the-month?pageNum=1&pageSize=10&bbox=40.240,-88.368,39.992,-88.120 The first dataset we will be using
-   is the weather and climate of Champaign, Illinois from 1902 to present.
-2) 
+1) https://www.ncei.noaa.gov/access/search/data-search/global-summary-of-the-month?pageNum=1&pageSize=10&bbox=40.240,-88.368,39.992,-88.120
+   The first dataset we will be using is the weather and climate of Champaign, Illinois from 1902 to present.
+3) 
 
 Timeline: Document the plan and timeline for implementing your project including who will complete each task.
 
