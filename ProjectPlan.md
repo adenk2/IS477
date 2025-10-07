@@ -8,7 +8,7 @@ Datasets: Identify and describe the datasets that you will use. You need to use 
 
 1) https://www.ncei.noaa.gov/access/search/data-search/global-summary-of-the-month?pageNum=1&pageSize=10&bbox=40.240,-88.368,39.992,-88.120
    The first dataset we will be using is the weather and climate of Champaign, Illinois from 1902 to present.
-3) https://quickstats.nass.usda.gov The second dataset we will be using is information about corn agriculture in Illinois.
+2) https://quickstats.nass.usda.gov The second dataset we will be utilizing for this project is the USDA National Agriculture Statistics corn commodity records. 
 
 Timeline: Document the plan and timeline for implementing your project including who will complete each task.
 
