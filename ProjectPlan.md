@@ -5,7 +5,9 @@ Research Question(s): How do climate factors impact the yearly corn harvests for
 Team: Brady Brooks and Aden Krueger 
 
 Both team members found a data source and a dataset and will adhere to all ethical guidelines. They will also devise a plan for the precise steps that will be taken to utilize the datasets to solve our research question, such as implementing a workflow and documentation.
+
 Brady will focus on a lot of the Python portion of the project, such as the extraction and enrichment, data integration, and data cleaning.
+
 Aden will focus on the data quality checks, ensuring reproducibility, and upload any reproducibility steps and data documentation to GitHub.
 
 Datasets: 
