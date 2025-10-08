@@ -9,7 +9,8 @@ Brady will focus on a lot of the Python portion of the project, such as the extr
 Aden will focus on the data quality checks, ensuring reproducibility, and upload any reproducibility steps and data documentation to GitHub.
 
 Datasets: 
-1)https://www.ncei.noaa.gov/access/search/data-search/global-summary-of-the-month?pageNum=1&pageSize=10&bbox=40.240,-88.368,39.992,-88.120
+
+1) https://www.ncei.noaa.gov/access/search/data-search/global-summary-of-the-month?pageNum=1&pageSize=10&bbox=40.240,-88.368,39.992,-88.120
 The first dataset is NOAA’s weather and climate data for Champaign, Illinois, spanning from 1902 to the present.  Each observation contains features about the weather for each month and year. The dataset includes features such as the mean, lowest, and highest temperatures in Fahrenheit for each month, as well as precipitation.
 
 2) https://quickstats.nass.usda.gov
