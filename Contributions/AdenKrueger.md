@@ -1,1 +1,1 @@
-Contribution summary
+Aden: I acquired and processed the NOAA GSOM climate dataset, developing dedicated notebooks for data acquisition, cleaning, and annualization. I created derived variables such as growing-season mean temperature and total precipitation to enahnce our analysis. I also prepared the GSOM dataset for integration with Brady's NASS dataset. Additionally, I contributed to the reproducibility documentation by drafting API setup and dataset integrity verification instructions. I also helped refine our data quality and cleaning sections in the status report. 
