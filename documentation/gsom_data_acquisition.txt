@@ -1,18 +1,22 @@
 
-Date Retrieved: 2025-11-11 04:16:17 UTC
+Date Retrieved: 2025-11-12 01:13:55 UTC
 Dataset: global-summary-of-the-month
 Station ID: USC00118740
 Station Name: Champaign 3 S, IL US
 Period of Record: 1902-08-01 to 2025-10-31
 Source URL: https://www.ncei.noaa.gov/access/services/data/v1
-Local File: ./noaa_data\USC00118740_GSOM_1902-08-01_to_2025-10-31.csv
+Local File: c:\Users\adenm\Documents\GitHub\IS477\data\raw\USC00118740_GSOM_1902-08-01_to_2025-10-31.csv
 File SHA-256 Checksum: 04318a24fe9bea7df4dbcc76c88611c16042ec268c77189f766f666c5fc3de43
 
 Reproduction Instructions:
 1. Request an API token from https://www.ncdc.noaa.gov/cdo-web/token
-2. Run the above Jupyter Notebook cells with the same parameters
+2. Run the above GSOM_Acquisition.ipynb Notebook cells with the same parameters
 3. Verify the resulting file's integrity using:
 $ shasum -a 256 USC00118740_GSOM_1902-08-01_to_2025-10-31.csv
 
 The output hash should match:
 04318a24fe9bea7df4dbcc76c88611c16042ec268c77189f766f666c5fc3de43
+
+Notes:
+- This data is saved to 'data/raw' for our pipeline
+- Metadata and checksum documentation are stored in 'BASE_URL/documentation'
