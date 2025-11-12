@@ -111,4 +111,4 @@ We plan to create a data dictionary for all variables in the merged dataset, as 
 **Updated Task:** We’ve created a data dictionary for the derived and updated variables for the clean and annualized GSOM dataset; however, since we have yet to merge both datasets I have not created a “master” data dictionary for this dataset yet. To see the data dictionary for the derived variables please visit /Notebooks/GSOM_Cleaning_Notebook.ipynb. 
 
 ## **Description Summary:**
-The project plan itself has remained the same. We have been able to stay on track with our timeline and have yet to come across anything we’ve needed to revise. Based on the feedback we have received for Milestone 2, we have added a “Constraints” and “Gaps” section to our project plan as we did not include this section upon our first submission.
+The project plan itself has remained the same. We have been able to stay on track with our timeline and have yet to come across anything we’ve needed to revise. Based on the feedback we have received for Milestone 2, **we have added a “Constraints” and “Gaps” section to our project plan** as we did not include this section upon our first submission.
