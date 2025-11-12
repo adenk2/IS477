@@ -94,3 +94,16 @@ We can also include a requirements.txt for Python dependencies to ensure proper 
 
 **Metadata and data documentation (cf. Module 15)**: Metadata and data documentation to support discovery, understandability, and reuse.
 We plan to create a data dictionary for all variables in the merged dataset, as well as including descriptive metadata, e.g., source, units, and description. As a final step, we can ensure documentation follows the FAIR principles as discussed in class: Findable, Accessible, Interoperable, and Reusable. 
+
+**Constraints:**
+
+*  Several constraints may affect the scope, quality, and reproducibility of this project:
+*  Data availability and completeness: The NOAA GSOM dataset relies on weather station data, which may have missing or inconsistent records over the long time period (1902–present). Some years or months may lack full climate measurements, limiting consistency.
+*  Temporal alignment: The NOAA dataset is monthly, whereas USDA NASS corn data is annual. Aggregating and matching temporal scales may introduce uncertainty or bias.
+*  Geographic granularity: The NOAA data used is for Champaign, Illinois, which may not fully represent climate conditions across the entire state. This spatial limitation may affect generalizability.
+*  API and access limitations: The NOAA API may restrict the number or frequency of requests, which could slow data collection and updates.
+
+**Gaps:**
+
+*  Integration precision: We need to determine the most appropriate way to aggregate monthly climate data for integration with yearly agricultural outcomes.
+*  Feature selection: We have not yet finalized which climate variables best predict corn yield.
