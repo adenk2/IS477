@@ -23,6 +23,8 @@ The notebooks where we complete these tasks are under the “Notebooks” folder
 
 **Locations:**
 - Notebooks: `/Notebooks/`
+- Processed data: `/data/processed/`
+- Cleaned data: `/data/cleaned/`
 
 ### **Weeks 5–6 (Nov 15–22)**: These tasks will be completed the week following the submission of this status report.
 Integrate datasets (merge by year) and derive features (growing-season averages).
@@ -36,6 +38,7 @@ Automate workflow and/or outline workflow processes.
 Finalize report (README.md), metadata, and reproducibility documentation.
 Note: We have partially created the metadata and reproducibility documentation for the acquisition of both NASS and GSOM data. This can be found in the documentation branch of our repo. 
 Tag and release the final GitHub version.
+- Reproducibility info: `/documentation/`
 
 ## **Task Updates by Module**
 
