@@ -30,8 +30,8 @@ Repository dedicated to the IS 477 group project.
 │
 ├── documentation/
 │   ├── USDA_NASS_Data_Acquisition.md
-│   ├── gsom_data_acquisition.txt
-│   └── ProjectPlan.md
+│   └── gsom_data_acquisition.txt
+│  
 │
 ├── README.md
 ├── StatusReport.md
