@@ -67,7 +67,7 @@ We plan on storing the data as tabular CSV files in the GitHub repository, ensur
 
 **Updated task:** For this task, we have created several folders in our repository to store our notebooks and data. Each folder and document title is easily interpretable. We have also separated each of the raw, processed, and cleaned datasets into their own respective folders. 
 
-_Extraction and enrichment (cf. Module 6): _
+_Extraction and enrichment (cf. Module 6):_
 We plan on calculating derived variables such as growing-season mean temperature, total precipitation, and temperature/precipitation outliers. We believe these manufactured variables will enrich our dataset and provide new insights. 
 
 **Updated task:** We created several derived variables to capture key agricultural and climactic characteristics of each year. These include Growing Degree Days (GDD) to quantity heat accumulation, temperature range as a measure of thermal amplitude, precipitation deviation to evaluate moisture conditions, and stress indicators such as heat days anf forst days. These variables enhance the dataset by summarizing seasonal patterns and extreme events which could directly affect crop growth and yield. 
@@ -87,7 +87,7 @@ We plan to convert any string numeric values into numeric types, as well as hand
 
 **Updated task:** For data cleaning, we reviewed temperature and precipitation units for consistency, ensuring all temperatures are in Fahrenheit while all precipitation is in milimeters. We also verified that year identifiers were correctly formatted and aligned across both datasets to support accurate integration. We also verified all values are in their correct datatypes. 
 
-_Workflow automation and provenance (cf. Module 11-12): Provide an automated end-to-end workflow. _
+_Workflow automation and provenance (cf. Module 11-12): Provide an automated end-to-end workflow._
 We can design and implement an end-to-end Python workflow:
 Pull data from APIs
 Perform cleaning, aggregation, and merging
@@ -96,7 +96,7 @@ Document and interpret visualizations
 
 **Updated Task:** Since we are still in the earlier stages of our project, we have not gotten to this task yet, but it will be addressed soon.
 
-_Reproducibility and transparency (cf. Module 13):  Your project must provide sufficient information to allow someone else to reproduce your workflow and analysis. _
+_Reproducibility and transparency (cf. Module 13):  Your project must provide sufficient information to allow someone else to reproduce your workflow and analysis._
 We can ensure reproducibility and transparency by including a README.md document containing:
 How to obtain NOAA NCEI API keys
 How to run the provided code/scripts, as well as how to adjust for new time filtering
