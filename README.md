@@ -14,7 +14,7 @@ Repository dedicated to the IS 477 group project.
 * Future work: [~500-1000 words] Brief discussion of any lessons learned and potential future work.
     * Aden 
 * Reproducing: Sequence of steps required for someone else to reproduce your results.
-
+    * Aden 
 * References: Formatted citations for any papers, datasets, or software used in your project.
 
 ## Repository Artifact Structure 
@@ -28,14 +28,15 @@ Repository dedicated to the IS 477 group project.
 │   ├── GSOM_Acquisition.ipynb
 │   ├── GSOM_Alteration.ipynb
 │   ├── GSOM_Cleaning_Notebook.ipynb
+|   ├── INTEGRATION_ANALYSIS.ipynb
 │   ├── NASS_Alteration.ipynb
 │   └── NASS_Cleaning.ipynb
 │
 ├── data/
 │   ├── cleaned/
 │   │   ├── gsom_annual_clean.csv
+│   │   ├── integrated_climate_corn.csv
 │   │   └── nass_clean.csv
-│   │
 │   ├── processed/
 │   │   ├── gsom_monthly_selected.csv
 │   │   └── illinois_corn_wide.csv
