@@ -17,6 +17,31 @@ Repository dedicated to the IS 477 group project.
     * Aden 
 * References: Formatted citations for any papers, datasets, or software used in your project.
 
+## Licenses
+
+### Code License
+All code and scripts in this repository are licensed under the MIT License. See `LICENSE` file for details.
+
+## Data Availability 
+
+### Box Repository 
+All raw, processed, and cleaned datasets are available via Box:
+* **Box Link:** [https://uofi.box.com/s/7m4ei68uzhfnoe2v5r4hby1cwu8ld2tj]
+* **Contents:**
+    * gsom_annual_clean.csv
+    * integrated_climate_corn.csv
+    * nass_clean.csv
+    * gsom_monthly_selected.csv
+    * illinois_corn_wide.csv
+    * USC00118740_GSOM_1902-08-01_to_2025-10-31.csv
+    * nass_qs_1902_to_2025.csv
+
+### Data Licenses
+* **NOAA GSOM Data:** U.S. Government Work - Public Domain
+* **USDA NASS Data:** U.S. Government Work - Public Domain
+* **Integrated Dataset:** CC BY 4.0 (derived from public domain sources)
+
+
 ## Repository Artifact Structure 
 
 ```
