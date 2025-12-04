@@ -110,8 +110,9 @@ All raw, processed, and cleaned datasets are available via Box:
 │   ├── USDA_NASS_Data_Acquisition.md
 │   └── gsom_data_acquisition.txt
 │  
-│
+├── LICENSE.txt
+├── ProjectPlan.md
 ├── README.md
-├── StatusReport.md
-└── ProjectPlan.md
+├── requirements.txt
+└── StatusReport.md
 ```
