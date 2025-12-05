@@ -284,7 +284,8 @@ All raw, processed, and cleaned datasets are available via Box:
 
 ## Code/Software
 
-All Python scripts, Jupyter notebooks, and analys
+All Python scripts, Jupyter notebooks, and analysis code in this repository:
+* **License:** MIT License (see LICENSE.txt)
 
 ## Troubleshooting 
 
