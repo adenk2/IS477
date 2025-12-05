@@ -67,6 +67,7 @@ pip install -r requirements.txt
 ### Step 1: Acquire NOAA Weather Data
 
 **Notebook**: 01_GSOM_Acquisition.ipynb
+
 What it does:
 * Downloads NOAA GSOM weather data via API
 * Saves raw monthly climate data 
@@ -160,7 +161,7 @@ Key variables:
 **Notebook:** `04_GSOM_Cleaning.ipynb`
 
 What it does:
-* Converts units: Celsius → Fahrenheit, millimeters → inches
+* Converts units: Celsius to Fahrenheit
 * Filters to growing season (April-September)
 * Aggregates monthly data to annual summaries
 * Creates derived variables (GDD, precipitation adequacy)
