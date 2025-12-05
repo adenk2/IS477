@@ -1,0 +1,103 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Climate Impact on Illinois Corn Production (1902-2025)",
+  "description": "Integrated dataset combining NOAA Global Summary of the Month (GSOM) climate data with USDA National Agricultural Statistics Service (NASS) corn production records for Illinois, spanning 124 years. The dataset enables analysis of relationships between growing-season climate variability and agricultural productivity.",
+  "version": "1.0",
+  "dateCreated": "2024-12-05",
+  "dateModified": "2024-12-05",
+  "datePublished": "2024-12-05",
+  "temporalCoverage": "1902/2025",
+  "spatialCoverage": {
+    "@type": "Place",
+    "name": "Illinois, United States",
+    "geo": {
+      "@type": "GeoShape",
+      "box": "36.970 -91.513 42.508 -87.495"
+    }
+  },
+  "creator": [
+    {
+      "@type": "Person",
+      "name": "Aden Krueger",
+      "identifier": "adenk2"
+    },
+    {
+      "@type": "Person",
+      "name": "Brady Brooks",
+      "identifier": "bradymb2"
+    }
+  ],
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "climate change",
+    "agriculture",
+    "corn production",
+    "Illinois",
+    "NOAA GSOM",
+    "USDA NASS",
+    "yield analysis",
+    "growing season",
+    "temperature",
+    "precipitation"
+  ],
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "contentUrl": "https://uofi.box.com/s/7m4ei68uzhfnoe2v5r4hby1cwu8ld2tj",
+      "encodingFormat": "text/csv"
+    }
+  ],
+  "variableMeasured": [
+    {
+      "@type": "PropertyValue",
+      "name": "year",
+      "description": "Calendar year of observation",
+      "unitText": "year"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "temp_avg_f",
+      "description": "Mean growing season temperature (April-September)",
+      "unitText": "degrees Fahrenheit"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "precip_total_mm",
+      "description": "Total growing season precipitation",
+      "unitText": "millimeters"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "yield_bu_per_acre",
+      "description": "Corn yield per acre",
+      "unitText": "bushels per acre"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "acres_harvested",
+      "description": "Total corn acres harvested in Illinois",
+      "unitText": "million acres"
+    }
+  ],
+  "isBasedOn": [
+    {
+      "@type": "Dataset",
+      "name": "NOAA Global Summary of the Month (GSOM)",
+      "url": "https://www.ncdc.noaa.gov/cdo-web/",
+      "publisher": {
+        "@type": "Organization",
+        "name": "National Oceanic and Atmospheric Administration"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "name": "USDA NASS QuickStats",
+      "url": "https://quickstats.nass.usda.gov/",
+      "publisher": {
+        "@type": "Organization",
+        "name": "United States Department of Agriculture"
+      }
+    }
+  ]
+}

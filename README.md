@@ -1,13 +1,13 @@
-# Climate Impact on Illinois Corn Production (1902-2024)
+# Climate Impact on Illinois Corn Production (1902-2025)
 Repository dedicated to the IS 477 group project. 
 
-* **Title:** Climate Impact on Illinois Corn Production (1902-2024)
+* **Title:** Climate Impact on Illinois Corn Production (1902-2025)
 * **Contributors:** 
     * Aden Krueger (adenk2)
     * Brady Brooks (bradymb2)
 
 ## Summary 
-This project examines the relationship between climate variability and corn production in Illinois over 124 years (1902 to 2024), with the simple goal of integrating historical weather data with agricultural statistics to understand how growing-season climate affects crop yields. The motivation stems from the critical importance of understanding climate-agriculture relationships within Illinois, as Illinois is one of the top corn-producing states in the United States. 
+This project examines the relationship between climate variability and corn production in Illinois over 124 years (1902 to 2025), with the simple goal of integrating historical weather data with agricultural statistics to understand how growing-season climate affects crop yields. The motivation stems from the critical importance of understanding climate-agriculture relationships within Illinois, as Illinois is one of the top corn-producing states in the United States. 
 
 Our primary research question is: How do growing-season climate variables correlate with corn production metrics in Illinois over 124 years? We hypothesized that climate-yield relationships would change over time as climate variability increases, with earlier periods showing a lessened climate sensitivity and modern eras potentially indicating climate-driven effects on yield metrics. 
 
@@ -24,7 +24,7 @@ Although our methodologies are consistent and accurate given the data, there are
 ## Data Quality
 
 ## Findings
-Our analysis of 124 years of integrated climate-corn data from 1902 to 2024 revealed several key findings that shed insight into the complex relationship between growing season climate patterns and the agricultural productivity in Champaign County, Illinois. 
+Our analysis of 124 years of integrated climate-corn data from 1902 to 2025 revealed several key findings that shed insight into the complex relationship between growing season climate patterns and the agricultural productivity in Champaign County, Illinois. 
 
 The most striking finding is the dramatic increase in corn yields over time, with a linear trend of ~+14.75 bushels per acre per decade (Figure 2, bottom panel, “INTEGRATION_ANALYSIS.ipynb”). We identified early 1900s yields averaged ~30-40 bushels per acre, while modern yields regularly exceed 200 bushels per acre. This nearly 10-fold increase can be primarily attributed to technological advancements rather than climate improvement. Simultaneously, growing season average temperatures have increased by +0.13°F per decade, and total precipitation has increased by 9.47mm per decade. This indicates a gradual warming and wetting trend has been present during the period of analysis. 
 
@@ -51,6 +51,175 @@ While we have made our analysis reproducible through comprehensive documentation
 These future directions would build on the strong foundation established by this project while addressing current limitations and extending our lens into climate-agriculture relationships in the Midwest corn belt. 
 
 ## Reproducing
+
+### Step 1: Acquire NOAA Weather Data
+
+**Notebook**: 01_GSOM_Acquisition.ipynb
+What it does:
+* Downloads NOAA GSOM weather data via API
+* Saves raw monthly climate data 
+
+Requirements:
+* NOAA API token (free): [https://www.ncdc.noaa.gov/cdo-web/token]
+* Replace NOAA_TOKEN in notebook with your token.
+
+**Ouput:** 
+* `data/raw/USC00118740_GSOM_1902-08-01_to_2025-10-31.csv`
+
+### STEP 2: Download USDA NASS Corn Data
+
+**MANUAL DOWNLOAD REQUIRED - No notebook for this step**
+
+**Instructions:** See `documentation/USDA_NASS_Data_Acquisition.txt`
+
+Quick steps:
+
+1. Go to: https://quickstats.nass.usda.gov/
+2. Apply filters:
+   * Sector: CROPS
+   * Group: FIELD CROPS
+   * Commodity: CORN
+   * Category: Select all: AREA PLANTED, AREA HARVESTED, PRODUCTION, YIELD
+   * Geographic Level: STATE
+   * State: ILLINOIS
+   * Year: 1902 to 2025
+3. Click "Get Data"
+4. Click "Download" to CSV format
+5. Save as: `data/raw/nass_qs_1902_to_2025.csv`
+
+**Verify:** File should be ~4,600 rows
+
+**Direct link:** [https://quickstats.nass.usda.gov/results/18E1C479-6BCF-3726-A3F5-2AAD423752F0]
+
+**Time:** ~5 minutes
+
+### STEP 3: Transform NASS Data (Long to Wide)
+
+**Notebook:** `02_NASS_Alteration.ipynb`
+
+What it does:
+* Transforms USDA data from long format to wide format
+* Filters to state-level Illinois corn statistics
+* Creates one row per year with metrics as columns
+
+**Input:**
+* `data/raw/nass_qs_1902_to_2025.csv`
+
+**Output:**
+* `data/processed/illinois_corn_analysis_ready.csv`
+* Format: ~124 rows (one per year), 5 columns
+
+Columns created:
+* `year`
+* `acres_planted`
+* `acres_harvested`
+* `yield_bu_per_acre`
+* `production_bushels`
+
+**Time:** ~1 minute
+
+### STEP 4: Select GSOM Variables
+
+**Notebook:** `03_GSOM_Alteration.ipynb`
+
+What it does:
+* Selects relevant climate variables from raw NOAA data
+* Focuses on agricultural metrics (temp, precip, extreme events)
+* Adds growing season flag (April-September)
+
+**Input:**
+* `data/raw/USC00118740_GSOM_*.csv`
+
+**Output:**
+* `data/processed/gsom_monthly_selected.csv`
+* Format: ~1,479 monthly records, 25 variables
+* Units: Still in Celsius and millimeters (will convert in next step)
+
+Key variables:
+* Temperature (avg, max, min, extremes)
+* Precipitation (total, max daily, day counts)
+* Degree days (heating, cooling)
+* Extreme weather day counts
+
+**Time:** ~1 minute
+
+### STEP 5: Clean & Annualize GSOM Data
+
+**Notebook:** `04_GSOM_Cleaning.ipynb`
+
+What it does:
+* Converts units: Celsius → Fahrenheit, millimeters → inches
+* Filters to growing season (April-September)
+* Aggregates monthly data to annual summaries
+* Creates derived variables (GDD, precipitation adequacy)
+* Adds data quality flags
+
+**Input:**
+* `data/processed/gsom_monthly_selected.csv`
+
+**Output:**
+* `data/processed/gsom_annual_clean.csv`
+* Format: ~123 annual records, climate variables in proper units
+
+Key transformations:
+* Monthly to Annual (one row per year)
+* Celsius to Fahrenheit
+* Creates Growing Degree Days (GDD) and other derived variables
+
+**Time:** ~1-2 minutes
+
+### STEP 6: Clean NASS Data
+
+**Notebook:** `05_NASS_Cleaning.ipynb`
+
+What it does:
+* Data quality checks on corn production data
+* Validates ranges (no negative values, realistic yields)
+* Handles any missing years
+* Creates derived metrics (harvest efficiency)
+
+**Input:**
+* `data/processed/illinois_corn_analysis_ready.csv`
+
+**Output:**
+* `data/processed/nass_cleaned.csv`
+* Format: ~124 annual records, validated and clean
+
+Quality checks:
+* Yield ranges (0-300 bu/acre)
+* Acreage consistency
+* Production calculation verification
+
+**Time:** ~1 minute
+
+### STEP 7: Integrate Datasets and Analyze
+
+**Notebook:** `06_Integration_Analysis.ipynb`
+
+What it does:
+* Merges cleaned climate and corn production data via inner join on year
+* Performs data quality checks and removes any incomplete records
+* Generates comprehensive statistical analysis (correlations, regressions)
+* Creates visualizations showing climate-agriculture relationships
+* Identifies extreme weather and yield years
+
+**Input:**
+* `data/cleaned/gsom_annual_clean.csv`
+* `data/cleaned/nass_clean.csv`
+
+**Output:**
+* `data/cleaned/integrated_climate_corn.csv`
+* Format: ~124 annual records, 19 columns
+* Multiple visualizations (correlation heatmap, time series, scatter plots)
+
+Analysis performed:
+* Pearson correlations between climate variables and corn yield
+* Simple linear regression models for individual predictors
+* Multiple linear regression model using key climate variables
+* Temporal trend analysis (linear trends per decade)
+* Extreme year identification (bottom/top 10% yields)
+
+**Time:** ~2-3 minutes
 
 ## References
 
