@@ -50,6 +50,18 @@ While we have made our analysis reproducible through comprehensive documentation
 
 These future directions would build on the strong foundation established by this project while addressing current limitations and extending our lens into climate-agriculture relationships in the Midwest corn belt. 
 
+## Prerequisites 
+
+### Software Requirements
+* Python 3.8 or higher
+* Jupyter Notebook
+* Require Python packages (see requirements.txt)
+
+Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
 ## Reproducing
 
 ### Step 1: Acquire NOAA Weather Data
@@ -242,10 +254,54 @@ All raw, processed, and cleaned datasets are available via Box:
     * USC00118740_GSOM_1902-08-01_to_2025-10-31.csv
     * nass_qs_1902_to_2025.csv
 
-### Data Licenses
-* **NOAA GSOM Data:** U.S. Government Work - Public Domain
-* **USDA NASS Data:** U.S. Government Work - Public Domain
-* **Integrated Dataset:** CC BY 4.0 (derived from public domain sources)
+## Data Licenses
+
+### Source Data
+
+### NOAA GSOM Climate Data
+* **License:** U.S. Government Work - Public Domain
+* **Source:** National Oceanic and Atmospheric Administration
+* **Terms:** No copyright restrictions. Free to use, modify, and redistribute.
+* **Attribution:** Not required but recommended
+
+### USDA NASS Agricultural Statistics
+* **License:** U.S. Government Work - Public Domain
+* **Source:** United States Department of Agriculture
+* **Terms:** No copyright restrictions. Free to use, modify, and redistribute.
+* **Attribution:** Cite as "USDA National Agricultural Statistics Service"
+
+### Derived/Integrated Data
+
+### Integrated Climate-Corn Dataset
+* **License:** Creative Commons Attribution 4.0 International (CC BY 4.0)
+* **Rights:** You are free to:
+  * Share — copy and redistribute the material
+  * Adapt — remix, transform, and build upon the material
+* **Conditions:**
+  * Attribution — You must give appropriate credit to the creators
+  * Cite original NOAA and USDA sources
+* **License Text:** https://creativecommons.org/licenses/by/4.0/
+
+## Code/Software
+
+All Python scripts, Jupyter notebooks, and analys
+
+## Troubleshooting 
+
+### NOAA API Issues
+* **Rate limit exceeded:** Wait 1 hour before retrying
+* **Invalid token:** Verify token in notebook matches email
+* **Network timeout:** Check internet connection, retry
+
+### NASS Data Issues
+* **File not found:** Verify filename exactly matches `nass_qs_1902_to_2025.csv`
+* **Wrong format:** Ensure CSV download (not Excel)
+* **Wrong filters:** Re-download using direct link in documentation
+
+### Notebook Execution Errors
+* **Module not found:** Run `pip install -r requirements.txt`
+* **Kernel crash:** Restart kernel and re-run from beginning
+* **Path errors:** Ensure running from project root directory
 
 
 ## Repository Artifact Structure 
