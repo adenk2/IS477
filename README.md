@@ -21,7 +21,47 @@ Although our methodologies are consistent and accurate given the data, there are
 
 ## Data Profile
 
+The first dataset is NOAA’s weather and climate data for Champaign, Illinois, spanning from 1902 to the present. Each observation contains features about the weather for each month and year. The dataset includes features such as the mean, lowest, and highest temperatures in Fahrenheit and precipitation in inches for each month. This dataset also contains other unique features that count how many times in a month the temperature was above or below a certain number. The shape of the raw data is 1479 observations and 150 features. We selected this dataset to be used to integrate with corn yield to determine the factor weather has on the quantity of corn harvested each year. We focus on features such as mean temperature and precipitation totals to help create our analysis. 
+
+The second dataset we will use for this project is the USDA National Agricultural Statistics Service's corn commodity records. This dataset provides detailed annual information on corn production, yield, acreage, and related economic data across the continental United States. This dataset comes from a website that originally contains over 57 million records and observations containing US statistics on agriculture. It allows the user to specify certain categories to help narrow down the dataset. 
+
+For our specific analysis we filtered it down by applying filters in this order: 
+
+Sector: Crops
+
+Group: Field Crops
+
+Commodity: Corn 
+
+Category: Area Planted, Area Harvested, Production, Yield
+
+Geographic Level: State
+
+State: Illinois
+
+Year Range: 1902-2025
+
+
+By applying these filters we only grabbed the data that we needed for our analysis so the number of observations in the dataset came out to be 4641. 
+For this analysis, we focused on state-level data for Illinois, allowing us to examine how long-term climate trends correspond with agricultural outcomes within the state. Key variables we look at included: Yield (bushels per acre), Area Harvested (acres), and Area Planted (acres). By combining these two datasets, the climate one and the corn harvest one, it allowed us to analyze our research question to determine the significance climate has on the production of corn in Illinois.
+
+Both datasets, the NCEI climate data and the USDA NASS agricultural data, are publicly accessible resources that exist in the public domain. Because these data come from federal agencies and contain no personal or identifying information, no individual consent or formal research board approval is required for this project. The public domain status allows broad use of the material, yet responsible research practices still guide how the data are handled.
+
+Even though the data are open, we follow all ethical and operational expectations recommended by the agencies. This includes using the APIs in a responsible way by staying within the documented request limits and keeping activity below five calls per second so that system performance for other users remains unaffected. We also follow attribution recommendations from both NCEI and the USDA. Although attribution is not legally enforced for public domain material, it is strongly encouraged because it supports transparency and acknowledges the work of the data providers.Beyond technical compliance, we take care to use the data ethically in all stages of analysis. Overall, the legal constraints for these datasets are minimal, yet our approach reflects high standards for ethical data use, complete documentation, reproducibility, and respect for publicly funded data systems.
+
 ## Data Quality
+
+Data quality assessment was conducted across both datasets (NOAA GSOM and USDA NASS) to ensure fitness for use in analyzing the relationship between climate variability and corn yields in Illinois. We characterized high-quality data by being complete, accurate, consistent, and appropriate, and found our data to be reliable for the analytical process. The GSOM monthly climate dataset underwent rigorous quality assessment and cleaning procedures to fit our expectations. Initial examinations revealed missing data across key variables, with temperature variables (avg, max, min) showing 0.2-0.3% missing values and precipitation variables having around 0.1% missing. Additionally, we found wind speed data was 100% missing and therefore excluded from analysis. Next, we filtered our dataset to the growing season (April-September), resulting in 740 monthly observations across 124 years. The aggregation to annual values produced 124 complete years, with no missing values in critical variables after processing. Data quality score averaged 99.7 out of 100, with 124 of 124 years having complete six-month growing seasons. Only 1902 had incomplete growing season data and subsequently received a score of 60. 
+
+All temperature measurements were successfully converted from Celsius to Fahrenheit, and derived variables like GDD (Growing Degree Days base 50°F) were computed without error. No duplicate years were detected, and temporal continuity was maintained throughout the 124 years.
+The USDA NASS corn production dataset exhibited excellent overall quality with complete data for the primary variables of interest. Statistical assessment revealed 124 years of data with zero missing values in yield_bu_per_acre, acres_harvested, and production_bushels. The acres_planted variable contained 24 missing values (19.4%) for years 1902-2024, likely reflecting differences in data collection practices. However, our analysis focused on acres_harvested rather than acres_planted, and thus, this compromised variable did not affect our overall analysis. No duplicates were detected, with each year appearing exactly once in the dataset, and additionally, no outliers were identified beyond expected ranges. 
+
+Within the USDA NASS corn dataset, normalization was performed by converting all acreage and production values from raw counts to millions for improved readability and interpretation (e.g., 10,850,000 acres became 10.85 million acres). This transformation preserved data integrity while enhancing usability. Descriptive statistics further confirmed expected trends, with corn yields increasing from a minimum of 221. Bushels per acre (1934) to a maximum of 219.0 bushels per acre (2024). 
+
+The integration of climate and corn production data via an inner join on the year variable produced a high-quality merged dataset with perfect temporal alignment. All 124 years from both source datasets were successfully merged with zero missing values in critical analysis variables. Consistency was maintained across the year range 1902-2024 for all variables, and the 1:1 merge validation confirmed no many-to-one relationships or data duplication issues. The final integrated dataset consists of 19 variables across 124 observations, providing a robust foundation for statistical analysis of climate-agriculture relationships. Post-integration quality checks confirmed that the data are fit for correlation analysis, regression modeling, and trend examination, as both datasets demonstrated fitness for their intended purposes.
+
+Overall, the integrated dataset successfully supports the research objectives of examining the climate-yield relationships, calculating correlation coefficients, fitting regression models, and identifying temporal trends. Data quality score, completeness metrics, and validation checks collectively indicate that these data meet the standards required for scientific analysis of climate impacts on Illinois corn production. 
+
 
 ## Findings
 Our analysis of 124 years of integrated climate-corn data from 1902 to 2025 revealed several key findings that shed insight into the complex relationship between growing season climate patterns and the agricultural productivity in Champaign County, Illinois. 
@@ -235,6 +275,28 @@ Analysis performed:
 **Time:** ~2-3 minutes
 
 ## References
+GitHub, Inc. (2024). GitHub: Software development platform. https://github.com
+
+Harris, C. R., Millman, K. J., van der Walt, S. J., Gommers, R., Virtanen, P., Cournapeau, D., ... Oliphant, T. E. (2020). Array programming with NumPy. Nature, 585(7825), 357–362. https://doi.org/10.1038/s41586-020-2649-2
+
+Hunter, J. D. (2007). Matplotlib: A 2D graphics environment. Computing in Science & Engineering, 9(3), 90–95. https://doi.org/10.1109/MCSE.2007.55
+
+Lawrimore, J. H., Ray, R., Applequist, S., Korzeniewski, B., & Menne, M. J. (2016). Global Summary of the Month (GSOM), Version 1 [Dataset]. NOAA National Centers for Environmental Information. https://doi.org/10.7289/V5QV3JJ5
+
+McKinney, W. (2010). Data structures for statistical computing in Python. In Proceedings of the 9th Python in Science Conference (pp. 51–56). https://doi.org/10.25080/Majora-92bf1922-00a
+
+Microsoft Corporation. (2024). Visual Studio Code. https://code.visualstudio.com
+
+National Centers for Environmental Information. (n.d.). USC00118740.csv [Data file]. NOAA. Retrieved December 4, 2025, from https://www.ncei.noaa.gov/data/global-summary-of-the-month/access/USC00118740.csv
+
+Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., ... Duchesnay, É. (2011). Scikit-learn: Machine learning in Python. Journal of Machine Learning Research, 12, 2825–2830. http://www.jmlr.org/papers/v12/pedregosa11a.html
+
+Python Software Foundation. (2024). Python standard library: os — Miscellaneous operating system interfaces. https://docs.python.org/3/library/os.html
+​​USDA National Agricultural Statistics Service. (n.d.). QuickStats [Data portal]. Retrieved December 4, 2025, from https://quickstats.nass.usda.gov
+
+Virtanen, P., Gommers, R., Oliphant, T. E., Haberland, M., Reddy, T., Cournapeau, D., ... van Mulbregt, P. (2020). SciPy 1.0: Fundamental algorithms for scientific computing in Python. Nature Methods, 17(3), 261–272. https://doi.org/10.1038/s41592-019-0686-2
+
+Waskom, M. L. (2021). Seaborn: Statistical data visualization. Journal of Open Source Software, 6(60), 3021. https://doi.org/10.21105/joss.03021
 
 ## Licenses
 
