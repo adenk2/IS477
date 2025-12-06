@@ -391,9 +391,11 @@ All Python scripts, Jupyter notebooks, and analysis code in this repository:
 │   │   ├── gsom_monthly_selected.csv
 │   │   └── illinois_corn_wide.csv
 │   │
-│   └── raw/
-│       ├── USC00118740_GSOM_1902-08-01_to_2025-10-31.csv
-│       └── nass_qs_1902_to_2025.csv
+│   ├── raw/
+│   │   ├── USC00118740_GSOM_1902-08-01_to_2025-10-31.csv
+│   │   └── nass_qs_1902_to_2025.csv
+│   │
+│   └── Output Dataset's Data Dictionary.pdf
 │
 ├── documentation/
 │   ├── USDA_NASS_Data_Acquisition.md
