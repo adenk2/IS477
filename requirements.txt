@@ -20,3 +20,10 @@ requests==2.31.0
 
 # Notebook execution
 nbconvert==7.12.0
+nbformat==5.9.2
+
+# Workflow automation
+snakemake==8.5.3
+
+# Additional dependencies for Snakemake
+pulp==2.8.0  # For Snakemake optimization

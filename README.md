@@ -103,6 +103,66 @@ pip install -r requirements.txt
 ```
 
 ## Reproducing
+When it comes to reproducibility for this project you have two options. The first option is to utilize Snakemake for an automated reproduction. The second option detailed will be a manual reproduction.
+
+### Workflow Automation
+
+### Automated Reproduction with Snakemake
+
+For automated execution of the entire workflow, use Snakemake:
+
+```bash
+# Install dependencies, this includes our Snakemake library
+pip install -r requirements.txt
+
+# Run complete workflow
+snakemake --cores 1
+
+# Preview workflow without executing
+snakemake --cores 1 --dry-run
+```
+
+**Important**: Step 2 (NASS data download) requires manual intervention. The workflow will pause and provide download instructions.
+
+#### What Snakemake Does
+
+Snakemake automates steps 1, 3-7 of the analysis pipeline:
+* Automatically tracks dependencies between steps
+* Only re-runs necessary steps when data changes
+* Provides logging for each step
+* Ensures reproducibility
+
+#### Workflow Structure
+
+```
+Step 1: acquire_gsom          this will download NOAA climate data
+Step 2: check_nass_download   we will verify manual NASS download
+Step 3: transform_nass        we will Transform NASS (long data format to wide)
+Step 4: select_gsom_variables we will select climate variables
+Step 5: clean_gsom            we will clean and annualize climate data
+Step 6: clean_nass            we will clean corn production data
+Step 7: integrate_data        we will integrate and analyze our new dataset
+```
+
+#### Quick Commands
+
+```bash
+# Complete workflow
+snakemake --cores 1
+
+# Preview workflow
+snakemake -n
+
+# Clean generated files (preserve raw data)
+snakemake clean
+
+# Visualize workflow
+snakemake --dag | dot -Tpng > workflow.png
+```
+
+**Detailed Guide**: See `Snakemake_Guide.md` for complete documentation.
+
+### Manual Reproduction
 
 ### Step 1: Acquire NOAA Weather Data
 
