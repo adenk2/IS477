@@ -345,6 +345,9 @@ All raw, processed, and cleaned datasets are available via Box:
   * Cite original NOAA and USDA sources
 * **License Text:** https://creativecommons.org/licenses/by/4.0/
 
+## Data Dictionary
+Please see `Output_Datasets_Data_Dictionary.pdf` in IS477/data/ for a full data dictionary of our integrated dataset. This dictionary includes variable names, descriptions, source, units, and general interpretation. 
+
 ## Code/Software
 
 All Python scripts, Jupyter notebooks, and analysis code in this repository:
