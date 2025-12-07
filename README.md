@@ -150,27 +150,27 @@ data/cleaned/nass_clean.csv               # Cleaned corn production data
 ### Troubleshooting
 **Error:** "NASS data not found"
 
-Download the NASS data file manually (see requirements above) 
+* Download the NASS data file manually (see requirements above) 
 
-Verify filename exactly matches: nass_qs_1902_to_2025.csv
+* Verify filename exactly matches: nass_qs_1902_to_2025.csv
 
 **Error:** "NOAA API token"
 
-Ensure you've added your token to 01_GSOM_Acquisition.ipynb
+* Ensure you've added your token to 01_GSOM_Acquisition.ipynb
 
-Token is emailed immediately after registration
+* Token is emailed immediately after registration
 
 **Error:** "Module not found"
 
-Run: pip install -r requirements.txt
+* Run: pip install -r requirements.txt
 
 **Notebook execution fails:**
 
-Check the error message for specific issues
+* Check the error message for specific issues
 
-Fix the problem and re-run python run_all.py
+* Fix the problem and re-run python run_all.py
 
-Completed notebooks will be skipped automatically
+* Completed notebooks will be skipped automatically
 
 **Requirements to Double Check:**
 * Python 3.8 or higher
