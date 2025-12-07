@@ -41,15 +41,15 @@ def print_step(step_num, message):
 
 def print_success(message):
     """Print a success message"""
-    print(f"{Colors.GREEN}✓ {message}{Colors.END}")
+    print(f"{Colors.GREEN}Success: {message}{Colors.END}")
 
 def print_warning(message):
     """Print a warning message"""
-    print(f"{Colors.YELLOW}⚠ {message}{Colors.END}")
+    print(f"{Colors.YELLOW}Warning: {message}{Colors.END}")
 
 def print_error(message):
     """Print an error message"""
-    print(f"{Colors.RED}✗ {message}{Colors.END}")
+    print(f"{Colors.RED}Error: {message}{Colors.END}")
 
 def check_python_version():
     """Check Python version"""
@@ -183,7 +183,7 @@ def check_manual_steps():
         print("   Instructions: documentation/USDA_NASS_Data_Acquisition.md")
         print("   Direct link: https://quickstats.nass.usda.gov/results/18E1C479-6BCF-3726-A3F5-2AAD423752F0")
     else:
-        size = nass_file.stat().st_size / (1024 * 1024)  # MB
+        size = nass_file.stat().st_size / (1024 * 1024)  
         print_success(f"NASS data found ({size:.2f} MB)")
     
     # Reminder about NOAA token
@@ -216,13 +216,12 @@ def run_notebook(notebook_path, step_num, description):
     start_time = datetime.now()
     
     try:
-        # Use python -m nbconvert directly (same as test script)
         result = subprocess.run(
             [sys.executable, '-m', 'nbconvert', '--to', 'notebook', '--execute',
              '--inplace', '--ExecutePreprocessor.timeout=600', notebook_path],
             capture_output=True,
             text=True,
-            timeout=900  # 15 minute timeout
+            timeout=900 
         )
         
         elapsed = (datetime.now() - start_time).total_seconds()
@@ -234,7 +233,7 @@ def run_notebook(notebook_path, step_num, description):
             print_error(f"Failed with return code {result.returncode}")
             if result.stderr:
                 print(f"{Colors.RED}Error output:{Colors.END}")
-                print(result.stderr[:500])  # First 500 chars of error
+                print(result.stderr[:500])
             return False
             
     except subprocess.TimeoutExpired:
@@ -264,7 +263,7 @@ def verify_outputs():
     for filepath, description in expected_outputs:
         path = Path(filepath)
         if path.exists():
-            size = path.stat().st_size / 1024  # KB
+            size = path.stat().st_size / 1024 
             print_success(f"{description}: {filepath} ({size:.1f} KB)")
         else:
             print_error(f"{description}: {filepath} - NOT FOUND")
@@ -294,7 +293,6 @@ def main():
     # Define workflow
     notebooks = [
         ("Notebooks/01_GSOM_Acquisition.ipynb", 1, "Acquiring NOAA GSOM climate data via API"),
-        # Step 2 is manual NASS download - already checked
         ("Notebooks/02_NASS_Alteration.ipynb", 3, "Transforming NASS data (long → wide format)"),
         ("Notebooks/03_GSOM_Alteration.ipynb", 4, "Selecting relevant GSOM climate variables"),
         ("Notebooks/04_GSOM_Cleaning.ipynb", 5, "Cleaning and annualizing GSOM data"),
@@ -318,7 +316,7 @@ def main():
             print("When ready, run this script again - completed notebooks will be skipped if outputs exist.")
             return 1
         
-        print()  # Blank line between steps
+        print() 
     
     # Verify outputs
     if not verify_outputs():
