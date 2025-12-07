@@ -112,11 +112,13 @@ When it comes to reproducibility for this project you have two options. The firs
 The automated script executed the entire workflow with minimal manual intervention. Only **two manual steps** are required.
 
 1. Download NASS Corn Data: 
+
 Manually download the USDA NASS corn dataset here: [https://quickstats.nass.usda.gov/results/18E1C479-6BCF-3726-A3F5-2AAD423752F0]
   * Click **Spreadsheet** and save it as: `data/raw/nass_qs_1902_to_2025.csv`
 
-2. NOAA API Token
-Ensure your NOAA API token is set in `Notebooks/01_GSOM_Acquisition.ipynb`
+2. NOAA API Token:
+
+Ensure your NOAA API token is set in `Notebooks/01_GSOM_Acquisition.ipynb`.
 
 **Now you are ready to run the workflow:**
 
@@ -126,7 +128,7 @@ cd path/to/IS477
 python run_all.py
 ```
 
-**Important**: The script will check for the manual NASS download (Step 1) and prompt you if it's missing. Follow the instructions in `documentation/USDA_NASS_Data_Acquisition.md` to download this file before running.
+**Important**: The script will check for the manual NASS download (Step 1) and prompt you if it's missing. If you have additional questions follow the instructions in `documentation/USDA_NASS_Data_Acquisition.md` to download this file before running.
 
 #### What Our Script Does
 
@@ -134,7 +136,6 @@ python run_all.py
 * Executes notebooks 1-7 in correct sequence
 * Provides colored progress feedback
 * Verifies all outputs are created
-* Handles errors gracefully with clear messages
 
 **Requirements:**
 * Python 3.8 or higher
