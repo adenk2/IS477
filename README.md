@@ -199,7 +199,7 @@ Requirements:
 
 **MANUAL DOWNLOAD REQUIRED - No notebook for this step**
 
-**Instructions:** See `documentation/USDA_NASS_Data_Acquisition.txt`
+**Instructions:** See `documentation/USDA_NASS_Data_Acquisition.md`
 
 Quick steps:
 

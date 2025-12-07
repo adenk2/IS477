@@ -45,7 +45,7 @@
     {
       "@type": "DataDownload",
       "contentUrl": "https://uofi.box.com/s/7m4ei68uzhfnoe2v5r4hby1cwu8ld2tj",
-      "encodingFormat": "text/csv"
+      "encodingFormat": "csv"
     }
   ],
   "variableMeasured": [
