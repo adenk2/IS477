@@ -65,5 +65,5 @@ To reproduce this exact dataset, follow these steps:
 
 3\. Execute Query: Click "Spreadsheet" button, your dataset will download as a CSV
 
-4\. Save as: nass\_qs\_1902\_to\_2025.csv (or your preferred filename)
+4\. Save as: nass\_qs\_1902\_to\_2025.csv and place into the folder data/raw/
 
