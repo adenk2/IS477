@@ -10,7 +10,7 @@ seaborn==0.13.0
 scipy==1.11.4
 scikit-learn==1.3.2
 
-# Jupyter environment
+# Jupyter environment for run_all.py
 jupyter==1.0.0
 notebook==7.0.6
 ipykernel==6.27.1
@@ -18,12 +18,6 @@ ipykernel==6.27.1
 # Data acquisition
 requests==2.31.0
 
-# Notebook execution
+# Notebook execution for run_all.py
 nbconvert==7.12.0
 nbformat==5.9.2
-
-# Workflow automation
-snakemake==8.5.3
-
-# Additional dependencies for Snakemake
-pulp==2.8.0  # For Snakemake optimization

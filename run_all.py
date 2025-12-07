@@ -17,11 +17,9 @@ Requirements:
 
 import subprocess
 import sys
-import os
 from pathlib import Path
 from datetime import datetime
 
-# ANSI color codes for pretty output
 class Colors:
     HEADER = '\033[95m'
     BLUE = '\033[94m'
@@ -53,51 +51,122 @@ def print_error(message):
     """Print an error message"""
     print(f"{Colors.RED}✗ {message}{Colors.END}")
 
-def check_prerequisites():
-    """Check if required files and setup exist"""
-    print_header("Checking Prerequisites")
-    
-    # Check Python version
-    if sys.version_info < (3, 8):
+def check_python_version():
+    """Check Python version"""
+    if sys.version_info >= (3, 8):
+        print_success(f"Python version: {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}")
+        return True
+    else:
         print_error(f"Python 3.8+ required. You have {sys.version_info.major}.{sys.version_info.minor}")
         return False
-    print_success(f"Python version: {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}")
+
+def check_packages():
+    """Check if required packages are installed"""
+    required_packages = [
+        'pandas', 'numpy', 'matplotlib', 'seaborn',
+        'scipy', 'sklearn', 'requests', 'nbconvert'
+    ]
     
-    # Check required packages
-    try:
-        import pandas
-        import numpy
-        import matplotlib
-        import seaborn
-        import scipy
-        import sklearn
-        import requests
-        print_success("All required packages installed")
-    except ImportError as e:
-        print_error(f"Missing package: {e.name}")
-        print_error("Run: pip install -r requirements.txt")
+    missing = []
+    for pkg in required_packages:
+        try:
+            __import__(pkg)
+        except ImportError:
+            missing.append(pkg)
+    
+    if missing:
+        print_error(f"Missing packages: {', '.join(missing)}")
+        print_error("Install with: pip install -r requirements.txt")
         return False
     
-    # Check Jupyter is installed
+    print_success("All required packages installed")
+    return True
+
+def check_jupyter():
+    """Check if Jupyter is installed"""
     try:
-        result = subprocess.run(['jupyter', '--version'], 
-                              capture_output=True, text=True, timeout=5)
+        result = subprocess.run(
+            [sys.executable, '-m', 'jupyter', '--version'],
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
         if result.returncode == 0:
             print_success("Jupyter installed")
+            return True
         else:
-            print_error("Jupyter not found. Install with: pip install jupyter")
+            print_error("Jupyter command failed")
             return False
     except (FileNotFoundError, subprocess.TimeoutExpired):
         print_error("Jupyter not found. Install with: pip install jupyter")
         return False
-    
-    # Check if notebooks directory exists
-    if not Path("Notebooks").exists():
-        print_error("Notebooks directory not found. Are you in the project root?")
+
+def check_nbconvert():
+    """Check if nbconvert command works"""
+    try:
+        result = subprocess.run(
+            [sys.executable, '-m', 'nbconvert', '--help'],
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+        if result.returncode == 0:
+            print_success("nbconvert command works")
+            return True
+        else:
+            print_error("nbconvert command failed")
+            return False
+    except Exception as e:
+        print_error(f"Error testing nbconvert: {e}")
         return False
-    print_success("Notebooks directory found")
+
+def check_file_structure():
+    """Check if required files and directories exist"""
+    required_items = [
+        ("Notebooks", "dir"),
+        ("Notebooks/01_GSOM_Acquisition.ipynb", "file"),
+        ("Notebooks/02_NASS_Alteration.ipynb", "file"),
+        ("Notebooks/03_GSOM_Alteration.ipynb", "file"),
+        ("Notebooks/04_GSOM_Cleaning.ipynb", "file"),
+        ("Notebooks/05_NASS_Cleaning.ipynb", "file"),
+        ("Notebooks/06_Integration_Analysis.ipynb", "file"),
+        ("data", "dir"),
+        ("data/raw", "dir"),
+    ]
     
+    missing = []
+    for item, item_type in required_items:
+        path = Path(item)
+        if item_type == "dir":
+            exists = path.is_dir()
+        else:
+            exists = path.is_file()
+        
+        if not exists:
+            missing.append(item)
+    
+    if missing:
+        print_error("Missing files/directories:")
+        for item in missing:
+            print(f"  - {item}")
+        return False
+    
+    print_success("All required files present")
     return True
+
+def check_prerequisites():
+    """Check if all prerequisites are met"""
+    print_header("Checking Prerequisites")
+    
+    checks = [
+        check_python_version(),
+        check_packages(),
+        check_jupyter(),
+        check_nbconvert(),
+        check_file_structure()
+    ]
+    
+    return all(checks)
 
 def check_manual_steps():
     """Check if manual prerequisite steps are complete"""
@@ -108,14 +177,16 @@ def check_manual_steps():
     # Check NASS data
     nass_file = Path("data/raw/nass_qs_1902_to_2025.csv")
     if not nass_file.exists():
-        warnings.append("NASS data not found at: data/raw/nass_qs_1902_to_2025.csv")
+        warnings.append("NASS data not found")
         print_warning("NASS data must be downloaded manually")
+        print("   File: data/raw/nass_qs_1902_to_2025.csv")
         print("   Instructions: documentation/USDA_NASS_Data_Acquisition.md")
         print("   Direct link: https://quickstats.nass.usda.gov/results/18E1C479-6BCF-3726-A3F5-2AAD423752F0")
     else:
-        print_success("NASS data found")
+        size = nass_file.stat().st_size / (1024 * 1024)  # MB
+        print_success(f"NASS data found ({size:.2f} MB)")
     
-    # Check NOAA token (basic check - just look for the notebook)
+    # Reminder about NOAA token
     token_notebook = Path("Notebooks/01_GSOM_Acquisition.ipynb")
     if token_notebook.exists():
         print_success("GSOM acquisition notebook found")
@@ -130,6 +201,13 @@ def check_manual_steps():
     
     return True
 
+def create_directories():
+    """Create necessary directories"""
+    dirs = ['data/raw', 'data/processed', 'data/cleaned', 'logs']
+    for d in dirs:
+        Path(d).mkdir(parents=True, exist_ok=True)
+    print_success("Directories created/verified")
+
 def run_notebook(notebook_path, step_num, description):
     """Execute a Jupyter notebook"""
     print_step(step_num, description)
@@ -138,9 +216,9 @@ def run_notebook(notebook_path, step_num, description):
     start_time = datetime.now()
     
     try:
-        # Use jupyter nbconvert to execute notebook
+        # Use python -m nbconvert directly (same as test script)
         result = subprocess.run(
-            ['jupyter', 'nbconvert', '--to', 'notebook', '--execute',
+            [sys.executable, '-m', 'nbconvert', '--to', 'notebook', '--execute',
              '--inplace', '--ExecutePreprocessor.timeout=600', notebook_path],
             capture_output=True,
             text=True,
@@ -154,26 +232,45 @@ def run_notebook(notebook_path, step_num, description):
             return True
         else:
             print_error(f"Failed with return code {result.returncode}")
-            print(f"{Colors.RED}Error output:{Colors.END}")
-            print(result.stderr)
+            if result.stderr:
+                print(f"{Colors.RED}Error output:{Colors.END}")
+                print(result.stderr[:500])  # First 500 chars of error
             return False
             
     except subprocess.TimeoutExpired:
         print_error("Notebook execution timed out (>15 minutes)")
         return False
     except FileNotFoundError:
-        print_error("jupyter command not found. Is Jupyter installed?")
+        print_error("nbconvert not found. Install with: pip install nbconvert")
         return False
     except Exception as e:
         print_error(f"Unexpected error: {e}")
         return False
 
-def create_directories():
-    """Create necessary directories"""
-    dirs = ['data/raw', 'data/processed', 'data/cleaned', 'logs']
-    for d in dirs:
-        Path(d).mkdir(parents=True, exist_ok=True)
-    print_success("Directories created/verified")
+def verify_outputs():
+    """Verify that expected output files were created"""
+    print_header("Verifying Outputs")
+    
+    expected_outputs = [
+        ("data/raw/USC00118740_GSOM_1902-08-01_to_2025-10-31.csv", "NOAA climate data"),
+        ("data/processed/illinois_corn_wide.csv", "Transformed NASS data"),
+        ("data/processed/gsom_monthly_selected.csv", "Selected climate variables"),
+        ("data/cleaned/gsom_annual_clean.csv", "Cleaned climate data"),
+        ("data/cleaned/nass_clean.csv", "Cleaned corn data"),
+        ("data/cleaned/integrated_climate_corn.csv", "Final integrated dataset")
+    ]
+    
+    all_present = True
+    for filepath, description in expected_outputs:
+        path = Path(filepath)
+        if path.exists():
+            size = path.stat().st_size / 1024  # KB
+            print_success(f"{description}: {filepath} ({size:.1f} KB)")
+        else:
+            print_error(f"{description}: {filepath} - NOT FOUND")
+            all_present = False
+    
+    return all_present
 
 def main():
     """Main execution function"""
@@ -207,54 +304,36 @@ def main():
     
     print_header("Executing Notebooks")
     
-    failed_notebooks = []
-    
     # Execute each notebook
     for notebook_path, step_num, description in notebooks:
         if not Path(notebook_path).exists():
             print_error(f"Notebook not found: {notebook_path}")
-            failed_notebooks.append((notebook_path, "File not found"))
-            continue
+            return 1
         
         success = run_notebook(notebook_path, step_num, description)
         
         if not success:
-            failed_notebooks.append((notebook_path, "Execution failed"))
             print_error(f"\nWorkflow stopped due to error in {notebook_path}")
-            print("Fix the issue and run again. Completed notebooks will be skipped.")
+            print("Check the error messages above and fix the issue.")
+            print("When ready, run this script again - completed notebooks will be skipped if outputs exist.")
             return 1
         
         print()  # Blank line between steps
     
-    # Summary
+    # Verify outputs
+    if not verify_outputs():
+        print_warning("\nSome output files are missing. Check notebook execution above.")
+        return 1
+    
+    # Success summary
     print_header("Workflow Complete!")
     print_success(f"All {len(notebooks)} notebooks executed successfully")
+    print_success("All expected output files created")
     print(f"\nCompleted: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"\n{Colors.GREEN}{Colors.BOLD}✓ Analysis pipeline completed successfully!{Colors.END}")
+    print(f"{Colors.GREEN}Final dataset: data/cleaned/integrated_climate_corn.csv{Colors.END}")
     
-    # Check outputs
-    print_header("Verifying Outputs")
-    expected_outputs = [
-        "data/cleaned/integrated_climate_corn.csv",
-        "data/cleaned/gsom_annual_clean.csv",
-        "data/cleaned/nass_clean.csv"
-    ]
-    
-    all_present = True
-    for output in expected_outputs:
-        if Path(output).exists():
-            size = Path(output).stat().st_size / 1024  # KB
-            print_success(f"{output} ({size:.1f} KB)")
-        else:
-            print_error(f"{output} - NOT FOUND")
-            all_present = False
-    
-    if all_present:
-        print(f"\n{Colors.GREEN}{Colors.BOLD}✓ Analysis pipeline completed successfully!{Colors.END}")
-        print(f"{Colors.GREEN}Final dataset: data/cleaned/integrated_climate_corn.csv{Colors.END}")
-        return 0
-    else:
-        print_error("\nSome output files are missing. Check notebook execution logs.")
-        return 1
+    return 0
 
 if __name__ == "__main__":
     try:
