@@ -109,16 +109,17 @@ When it comes to reproducibility for this project you have two options. The firs
 
 ### Automated Reproduction with our Run_All Script
 
-The automated script executed the entire workflow with minimal manual intervention. Only **two manual steps** are required.
+The automated script executes the entire workflow with minimal manual intervention. Only **two manual steps** are required.
 
 1. Download NASS Corn Data: 
 
 Manually download the USDA NASS corn dataset here: [https://quickstats.nass.usda.gov/results/18E1C479-6BCF-3726-A3F5-2AAD423752F0]
   * Click **Spreadsheet** and save it as: `data/raw/nass_qs_1902_to_2025.csv`
+If this step is not completed or `nass_qs_1902_to_2025.csv` does not exist in the correct folder, `run_all.py` will not execute. 
 
 2. NOAA API Token:
 
-Ensure your NOAA API token is set in `Notebooks/01_GSOM_Acquisition.ipynb`.
+Ensure your NOAA API token is set in `Notebooks/01_GSOM_Acquisition.ipynb`. We have ensured a preset API token is present if downloading this project directly from the GitHub release. 
 
 **Now you are ready to run the workflow:**
 
@@ -149,12 +150,14 @@ data/cleaned/nass_clean.csv               # Cleaned corn production data
 ### Troubleshooting
 **Error:** "NASS data not found"
 
-Download the NASS data file manually (see requirements above)
+Download the NASS data file manually (see requirements above) 
+
 Verify filename exactly matches: nass_qs_1902_to_2025.csv
 
 **Error:** "NOAA API token"
 
 Ensure you've added your token to 01_GSOM_Acquisition.ipynb
+
 Token is emailed immediately after registration
 
 **Error:** "Module not found"
@@ -164,7 +167,9 @@ Run: pip install -r requirements.txt
 **Notebook execution fails:**
 
 Check the error message for specific issues
+
 Fix the problem and re-run python run_all.py
+
 Completed notebooks will be skipped automatically
 
 **Requirements to Double Check:**
