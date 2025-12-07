@@ -137,12 +137,6 @@ python run_all.py
 * Provides colored progress feedback
 * Verifies all outputs are created
 
-**Requirements:**
-* Python 3.8 or higher
-* `pip install -r requirements.txt`
-* NOAA API token set in `Notebooks/01_GSOM_Acquisition.ipynb`
-* NASS data manually downloaded to `data/raw/nass_qs_1902_to_2025.csv`
-
 ### Expected Output 
 ```bash
 data/cleaned/integrated_climate_corn.csv  # Final integrated dataset
@@ -172,6 +166,12 @@ Run: pip install -r requirements.txt
 Check the error message for specific issues
 Fix the problem and re-run python run_all.py
 Completed notebooks will be skipped automatically
+
+**Requirements to Double Check:**
+* Python 3.8 or higher
+* `pip install -r requirements.txt`
+* NOAA API token set in `Notebooks/01_GSOM_Acquisition.ipynb`
+* NASS data manually downloaded to `data/raw/nass_qs_1902_to_2025.csv`
 
 ### Manual Reproduction
 
